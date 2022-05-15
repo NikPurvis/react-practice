@@ -22,11 +22,16 @@ const App = () => {
     },
   ]
 
+  const handleSearch = (event) => {
+    console.log("handleSearch:", event.target.value)
+  }
+
   return (
     <div>
       <h1>My Hacker Stories</h1>
 
-      <Search />
+      {/* // B */}
+      <Search onSearch={handleSearch} />
 
       <hr />
 
@@ -37,7 +42,7 @@ const App = () => {
 }
 
 
-const Search = () => {
+const Search = (props) => {
   // useState function takes an initial state as an argument.
   // Providing this initial state (""), tells React it will change.
   // Calling this function returns an array with two entries:
@@ -48,6 +53,9 @@ const Search = () => {
   const handleChange = (event) => {
     // The handler uses the event's value and the state updater function to set the updated state.
     setSearchTerm(event.target.value)
+
+    // B
+    props.onSearch(event)
   }
   // After the updated state is set in a component, the component renders again, meaning the component function runs again.
   // The updated state becomes the current state and is displayed in the components JSX.
