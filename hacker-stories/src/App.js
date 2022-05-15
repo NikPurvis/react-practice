@@ -36,18 +36,34 @@ const App = () => {
   )
 }
 
+
 const Search = () => {
+  // useState function takes an initial state as an argument.
+  // Providing this initial state (""), tells React it will change.
+  // Calling this function returns an array with two entries:
+  //    1. searchTerm is the current state
+  //    2. setSearchTerm is the function to update the state
+  const [searchTerm, setSearchTerm] = React.useState("")
+  // User types and the change event is captured by event handler.
   const handleChange = (event) => {
-    console.log(event.target.value)
+    // The handler uses the event's value and the state updater function to set the updated state.
+    setSearchTerm(event.target.value)
   }
+  // After the updated state is set in a component, the component renders again, meaning the component function runs again.
+  // The updated state becomes the current state and is displayed in the components JSX.
 
   return (
     <div>
       <label htmlFor="search">Search: </label>
       <input id="search" type="text" onChange={handleChange} />
+
+      <p>
+        Searching for <strong>{searchTerm}</strong>.
+      </p>
     </div>
   )
 }
+
 
 const List = (props) => (
   <ul>
