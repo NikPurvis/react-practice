@@ -22,22 +22,25 @@ const App = () => {
     },
   ]
 
-  // A - introduces callback function
+  const [searchTerm, setSearchTerm] = React.useState("")
+
   const handleSearch = (event) => {
-    // C - function "calls back" to where it was introduced
-    console.log("handleSearch:", event.target.value)
+    setSearchTerm(event.target.value)
   }
+
+  const searchedStories = stories.filter((story) =>
+    story.title.toLowerCase().includes(searchTerm.toLowerCase()))
+
 
   return (
     <div>
       <h1>My Hacker Stories</h1>
 
-      {/* // B */}
       <Search onSearch={handleSearch} />
 
       <hr />
 
-      <List list={stories} />
+      <List list={searchedStories} />
 
     </div>
   )
@@ -45,31 +48,15 @@ const App = () => {
 
 
 const Search = (props) => {
-  // useState function takes an initial state as an argument.
-  // Providing this initial state (""), tells React it will change.
-  // Calling this function returns an array with two entries:
-  //    1. searchTerm is the current state
-  //    2. setSearchTerm is the function to update the state
-  const [searchTerm, setSearchTerm] = React.useState("")
-  // User types and the change event is captured by event handler.
-  const handleChange = (event) => {
-    // The handler uses the event's value and the state updater function to set the updated state.
-    setSearchTerm(event.target.value)
-
-    // B - uses the callback function
-    props.onSearch(event)
-  }
-  // After the updated state is set in a component, the component renders again, meaning the component function runs again.
-  // The updated state becomes the current state and is displayed in the components JSX.
 
   return (
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={handleChange} />
+      <input id="search" type="text" onChange={props.onSearch} />
 
-      <p>
+      {/* <p>
         Searching for <strong>{searchTerm}</strong>.
-      </p>
+      </p> */}
     </div>
   )
 }
