@@ -22,7 +22,9 @@ const App = () => {
     },
   ]
 
+  // A - introduces callback function
   const handleSearch = (event) => {
+    // C - function "calls back" to where it was introduced
     console.log("handleSearch:", event.target.value)
   }
 
@@ -54,7 +56,7 @@ const Search = (props) => {
     // The handler uses the event's value and the state updater function to set the updated state.
     setSearchTerm(event.target.value)
 
-    // B
+    // B - uses the callback function
     props.onSearch(event)
   }
   // After the updated state is set in a component, the component renders again, meaning the component function runs again.
