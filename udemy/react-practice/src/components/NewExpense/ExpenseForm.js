@@ -2,7 +2,7 @@ import { title } from "process"
 import React, { useState } from "react"
 import "./ExpenseForm.css"
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
     // Using individual state slices
     const [enteredTitle, setEnteredTitle] = useState("")
     const [enteredAmount, setEnteredAmount] = useState("")
@@ -47,7 +47,9 @@ const ExpenseForm = () => {
             date: new Date(enteredDate),
         }
 
-        console.log("expenseData:", expenseData)
+        // console.log("expenseData:", expenseData)
+
+        props.onSaveExpenseData(expenseData)
 
         // The advantage to individual pieces of state is that we can use two-way binding, not just listening to changes, but feeding the state back into the input via the form's value.
         // When the form is submitted, we'll call the set state function to reset it back to the initial state (empty string in this case).
